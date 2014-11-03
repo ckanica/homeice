@@ -1,4 +1,5 @@
 import os
+import json
 
 from flask import Flask, request
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -6,7 +7,18 @@ from flask.ext.sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.debug = True
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+services = os.environ.get('VCAP_SERVICES', None)
+if services:
+    postgres = json.loads(services)['postgresql-9.1']['credentials']
+    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://{0}:{1}@{2}/{3}".format(
+        postgres['user'],
+        postgres['password'],
+        postgres['host'],
+        postgres['name']
+    )
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+
 db = SQLAlchemy(app)
 
 class Message(db.Model):
