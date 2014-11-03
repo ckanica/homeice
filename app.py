@@ -9,7 +9,7 @@ app.debug = True
 
 services = os.environ.get('VCAP_SERVICES', None)
 if services:
-    postgres = json.loads(services)['postgresql-9.1']['credentials']
+    postgres = json.loads(services)['postgresql-9.1'][0]['credentials']
     app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://{0}:{1}@{2}/{3}".format(
         postgres['user'],
         postgres['password'],
