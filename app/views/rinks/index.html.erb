@@ -1,0 +1,31 @@
+<h1>Listing rinks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Rink type</th>
+      <th>Ottawa rinks ref</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rinks.each do |rink| %>
+      <tr>
+        <td><%= rink.name %></td>
+        <td><%= rink.address %></td>
+        <td><%= rink.rink_type %></td>
+        <td><%= rink.ottawa_rinks_ref %></td>
+        <td><%= link_to 'Show', rink %></td>
+        <td><%= link_to 'Edit', edit_rink_path(rink) %></td>
+        <td><%= link_to 'Destroy', rink, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rink', new_rink_path %>

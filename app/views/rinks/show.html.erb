@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @rink.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @rink.address %>
+</p>
+
+<p>
+  <strong>Rink type:</strong>
+  <%= @rink.rink_type %>
+</p>
+
+<p>
+  <strong>Ottawa rinks ref:</strong>
+  <%= @rink.ottawa_rinks_ref %>
+</p>
+
+<%= link_to 'Edit', edit_rink_path(@rink) %> |
+<%= link_to 'Back', rinks_path %>

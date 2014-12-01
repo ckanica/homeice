@@ -1,0 +1,33 @@
+<%= form_for(@rink) do |f| %>
+  <% if @rink.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@rink.errors.count, "error") %> prohibited this rink from being saved:</h2>
+
+      <ul>
+      <% @rink.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :rink_type %><br>
+    <%= f.text_field :rink_type %>
+  </div>
+  <div class="field">
+    <%= f.label :ottawa_rinks_ref %><br>
+    <%= f.number_field :ottawa_rinks_ref %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

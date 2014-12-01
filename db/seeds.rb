@@ -5,3 +5,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+require 'csv'
+
+rinks_raw = File.read('rinks.csv')
+csv = CSV.parse(rinks_raw, headers: true)
+
+csv.each do |row|
+    Rink.create!(name: row['Name'],
+                 address: row['Address'],
+                 rink_type: row['Rink Type'],
+                 ottawa_rinks_ref: row['rinkid'])
+end
