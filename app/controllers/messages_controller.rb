@@ -25,10 +25,11 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    puts params
+    parsed_message = parse_rink_id(params['Body'])
     @message = Message.new(body: params['Body'],
                            phone: params['From'],
-                           rink_id: 0
+                           rink_id: parsed_message[0],
+                           condition: parsed_message[1]
                            )
 
     respond_to do |format|
@@ -70,6 +71,11 @@ class MessagesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_message
       @message = Message.find(params[:id])
+    end
+
+    def parse_rink_id(body)
+      parsed =  body.chars.map {|x| x[/\d+/]}.compact
+      return [parsed[0..parsed.length-2].join('').to_i, parsed[parsed.length-1].to_i]
     end
 
 end
