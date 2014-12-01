@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :verify_authenticity_token
 
   # GET /messages
   # GET /messages.json
@@ -24,7 +25,11 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
+    puts params
+    @message = Message.new(body: params['Body'],
+                           phone: params['From'],
+                           rink_id: 0
+                           )
 
     respond_to do |format|
       if @message.save
@@ -67,8 +72,4 @@ class MessagesController < ApplicationController
       @message = Message.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def message_params
-      params.require(:message).permit(:body, :phone, :rink_id)
-    end
 end
