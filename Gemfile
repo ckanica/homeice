@@ -30,6 +30,7 @@ gem 'spring',        group: :development
 
 gem 'unicorn'
 gem 'json'
+gem 'upmin-admin'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

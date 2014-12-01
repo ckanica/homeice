@@ -11,6 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20141201190318) do
+
+  create_table "messages", force: true do |t|
+    t.string   "body"
+    t.string   "phone"
+    t.integer  "rink_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
