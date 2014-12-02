@@ -13,8 +13,13 @@ rinks_raw = File.read('rinks.csv')
 csv = CSV.parse(rinks_raw, headers: true)
 
 csv.each do |row|
-    Rink.create!(name: row['Name'],
+    rink = Rink.create!(name: row['Name'],
                  address: row['Address'],
                  rink_type: row['Rink Type'],
                  ottawa_rinks_ref: row['rinkid'])
+
+    Message.create!(body: "#{row['rinkid']}0",
+                    phone: "16137089",
+                    rink: rink,
+                    condition: 0)
 end
