@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :rinks
+
+  resources :rinks do
+    resources :messages
+  end
 
   resources :messages
 

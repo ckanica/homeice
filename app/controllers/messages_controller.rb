@@ -5,7 +5,12 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    if params[:rink_id]
+        @rink = Rink.find(params[:rink_id])
+        @messages = @rink.messages
+    else
+        @messages = Message.all
+    end
   end
 
   # GET /messages/1
